@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Alert, Button, ImageBackground, Keyboard, KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
+import { Alert, Button, ImageBackground, Keyboard, KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // import ""./LoginScreen.css";
 import RegisterScreen from "./RegisterScreen";
@@ -27,10 +27,11 @@ const LoginScreen = (props: any)=> {
     //Call API loginUser
     const loginUser = async (formData: any) => {
         try {
-            await axios.post('http://192.168.134.1:5000/auth/login', formData).then((response)=> {
+            await axios.post('http://192.168.134.1:5000/api/auth/login', formData).then((response)=> {
                 console.log(response.data); // Log the response from the server
+                props.navigation.navigate('HomeScreen', {user: response.data});
             })
-            props.navigation.navigate('HomeScreen');
+            
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
@@ -79,7 +80,7 @@ const LoginScreen = (props: any)=> {
     
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS === 'android' ? 'padding' : 'height'} style={styles.container}>
+        <ScrollView style= {styles.container}>
             <SafeAreaView>
                 <StatusBar backgroundColor={'#FFFFFF'} barStyle={"dark-content"}></StatusBar>
                 <View style={styles.title}>
@@ -112,7 +113,7 @@ const LoginScreen = (props: any)=> {
                 </TouchableOpacity>
             </View>
             </SafeAreaView>
-        </KeyboardAvoidingView>
+        </ScrollView>
     )
 }
 

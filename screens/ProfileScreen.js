@@ -1,12 +1,18 @@
+import {useRoute} from '@react-navigation/native';
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Modal, TouchableWithoutFeedback,TextInput } from 'react-native';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({route, user, handleUser, navigation}) => {
+  // const route = useRoute()
+  console.log (user)
+  console.log ('------------------ProfileScreen-----------------------')
+  console.log (handleUser)
+  console.log ('------------------ProfileScreen-----------------------')
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
    const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('Tran Khoi');
+  const [name, setName] = useState(user.firstname + ' ' + user.lastname);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
@@ -29,7 +35,8 @@ const ProfileScreen = () => {
   return (
     <View style={[styles.container, isDarkMode ? styles.darkContainer : styles.lightContainer]}>
       <View style={styles.avatarContainer}>
-        <Image source={require('./image/avatar.jpg')} style={styles.avatar} />
+        {/* <Image source={require('./image/avatar.jpg')} style={styles.avatar} /> */}
+        <Image source={{uri: user.profilePicture}} style={styles.avatar} />
         <View style={styles.profileHeader}>
         <View style={styles.userInfo}>
         <Text style={styles.username}>{name}</Text>

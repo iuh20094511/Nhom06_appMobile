@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Text } from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import MessageList from "./MessageList";
@@ -12,7 +12,16 @@ import Navigation from "../../Navigation";
 import ModalProfile from "./ModalProfile";
 
 const Tab = createBottomTabNavigator();
-const HomeScreen = () => {
+const HomeScreen = ({route}) => {
+  const [user, setUser] = useState(null);
+  const handleUser = (newUser: any) => {setUser(newUser)}
+  useEffect(()=>{
+    const newuser = route.params.user
+    console.log (newuser)
+    console.log ('---------------USERmoi----------------------')
+    setUser(newuser)
+    
+  },[user])
     return (
         
           // <NavigationContainer>
@@ -41,8 +50,14 @@ const HomeScreen = () => {
         })}
       >
         <Tab.Screen name="Message" component={MessageList} />
-        <Tab.Screen name="Follow" component={FollowScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
+        {/* <Tab.Screen name="Follow" component={FollowScreen} /> */}
+        <Tab.Screen name="Follow">
+          {(props) => <FollowScreen {...props} user = {user.user} handleUser = {handleUser} />}
+        </Tab.Screen>
+        {/* <Tab.Screen name="Profile" component={ProfileScreen} user = {user} handleUser = {handleUser}/> */}
+        <Tab.Screen name="Profile">
+          {(props) => <ProfileScreen {...props} user = {user.user} handleUser = {handleUser} />}
+        </Tab.Screen>
       </Tab.Navigator>
     // </NavigationContainer>
         

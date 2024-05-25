@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { Button, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
+import { Button, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
 import axios from "axios";
@@ -27,7 +27,7 @@ const RegisterScreen = (props: any)=> {
     //call API refisterUserWithOtp
     const registerUserWithOtp = async (formData : any) => {
         try {
-            await axios.post('http://192.168.134.1:5000/auth/register', formData).then((response)=> {
+            await axios.post('http://192.168.134.1:5000/api/auth/register', formData).then((response)=> {
                 console.log(response.data); // Log the response from the server
             })
             props.navigation.navigate('HomeScreen');
@@ -54,7 +54,7 @@ const RegisterScreen = (props: any)=> {
     //call API sendOtpByEmail
     const sendOtpByEmail = async (username: any) => {
         try {
-            await axios.post('http://192.168.134.1:5000/auth/send-otp', {username}).then((response)=> {
+            await axios.post('http://192.168.134.1:5000/api/auth/send-otp', {username}).then((response)=> {
                 console.log(response.data); // Log the response from the server
 
             })
@@ -123,6 +123,7 @@ const RegisterScreen = (props: any)=> {
         // registerUserWithOtp(formData)  
       };  
     return (
+        <ScrollView>
         <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor={'#FFFFFF'} barStyle={"dark-content"}></StatusBar>
             <View style={styles.title}>
@@ -170,6 +171,7 @@ const RegisterScreen = (props: any)=> {
                 </TouchableOpacity>
             </View>       
         </SafeAreaView>
+        </ScrollView>
     )
 }
 

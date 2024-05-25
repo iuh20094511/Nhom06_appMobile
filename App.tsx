@@ -8,8 +8,6 @@ import HomeScreen from "./screens/HomeScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MessageList from "./screens/MessageList";
-import FollowScreen from "./screens/FollowScreen";
-import {Image} from "react-native-elements";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Navigation from "../Navigation";
@@ -80,8 +78,8 @@ const App = ()=>{
     
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="DangnhapScreen" component={LoginScreen} options={{headerShown: false}}></Stack.Screen>
-        <Stack.Screen name="DangkyScreen" component={RegisterScreen} options={{headerShown: false}}></Stack.Screen> */}
+        <Stack.Screen name="DangnhapScreen" component={LoginScreen} options={{headerShown: false}}></Stack.Screen>
+        <Stack.Screen name="DangkyScreen" component={RegisterScreen} options={{headerShown: false}}></Stack.Screen>
         {/* <Stack.Screen name="ProfileScreen" component={ProfileScreen} ></Stack.Screen> */}
         <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown: false}}></Stack.Screen>
         <Stack.Screen name="MessageList" component={MessageList} options={{headerShown: false}}></Stack.Screen>
